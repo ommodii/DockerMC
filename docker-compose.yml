@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  playit:
+    image: ghcr.io/playit-cloud/playit-agent:0.16
+    network_mode: host
+    environment:
+      - SECRET_KEY=${PLAYIT_KEY}
+
+  minecraft:
+    image: itzg/minecraft-server
+    container_name: minecraft-server
+    user: "0:0"
+    volumes:
+      - "${DATA_PATH}:/data:rw"
+    ports:
+      - "${SERVER_PORT}:25565"
+    environment:
+      EULA: "TRUE"
+      TYPE: "${SERVER_TYPE}"
+      VERSION: "${MC_VERSION}"
+      OPS: "${OPS}"
+      MEMORY: "${MEMORY}"
+      SKIP_CHOWN: "TRUE" # Mandatory for SMB/NAS setups
+
+      ENFORCE_WHITELIST: "${WHITELIST_ENABLED}"
+      SPAWN_PROTECTION: "${SPAWN_PROTECTION}"
+      DIFFICULTY: "${DIFFICULTY}"
+
+      ICON: "${SERVER_ICON_URL}"
+      OVERRIDE_ICON: "TRUE"
+      MOTD: "${MOTD}"
+
+      VIEW_DISTANCE: "${VIEW_DISTANCE}"
+
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
