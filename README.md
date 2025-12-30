@@ -47,3 +47,13 @@ Keep your world data off your boot drive. We map a Docker **Volume** to a networ
 2. **Create your environment file:**
    ```bash
    cp .env.example .env
+
+## 🛠 Management
+Use the provided scripts to manage the server without memorizing Docker commands.
+
+| Action | Mac/Linux | Windows |
+| :--- | :--- | :--- |
+| **Start** | `./manage.sh start` | Run `manage.bat` (Option 1) |
+| **Stop** | `./manage.sh stop` | Run `manage.bat` (Option 2) |
+| **Logs** | `./manage.sh logs` | Run `manage.bat` (Option 3) |
+| **Restart**| `./manage.sh restart`| Run `manage.bat` (Option 4) |
